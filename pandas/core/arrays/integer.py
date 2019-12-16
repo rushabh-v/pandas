@@ -224,6 +224,7 @@ def coerce_to_array(values, dtype, mask=None, copy=False):
             "mixed-integer",
             "integer-na",
             "mixed-integer-float",
+            "boolean"
         ]:
             raise TypeError(f"{values.dtype} cannot be converted to an IntegerDtype")
 
