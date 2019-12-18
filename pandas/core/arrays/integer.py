@@ -209,7 +209,8 @@ def coerce_to_array(values, dtype, mask=None, copy=False):
         values = np.array(values, dtype=object, copy=copy)
 
     elif isinstance(values, np.ndarray):
-        pass
+        if copy:
+            values = values.copy()
     else:
         values = np.array(values, copy=copy)
 
@@ -224,7 +225,7 @@ def coerce_to_array(values, dtype, mask=None, copy=False):
             "mixed-integer",
             "integer-na",
             "mixed-integer-float",
-            "boolean"
+            "boolean",
         ]:
             raise TypeError(f"{values.dtype} cannot be converted to an IntegerDtype")
 
