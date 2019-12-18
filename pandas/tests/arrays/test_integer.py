@@ -714,7 +714,8 @@ def test_to_integer_array_float():
     "values, dtype",
     [
         ([9999999999999999, 123123123123123123, 10000000000000543, np.nan], "Int64"),
-        (np.array([9999999999999999, 123123123123123123, 10000000000000543], dtype=np.int64), "Int64"),
+        (np.array([9999999999999999, 123123123123123123, 10000000000000543],
+         dtype=np.int64), "Int64"),
     ],
 )
 def test_to_integer_array_large_numbers(values, dtype):
@@ -722,7 +723,7 @@ def test_to_integer_array_large_numbers(values, dtype):
     assert result.dtype == dtype
     for i in range(len(values)):
         if not np.isnan(values[i]):
-            assert result[i]==values[i]
+            assert result[i] == values[i]
 
 
 @pytest.mark.parametrize(
