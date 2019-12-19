@@ -720,10 +720,9 @@ def test_to_integer_array_float():
 )
 def test_to_integer_array_large_numbers(values, dtype):
     result = integer_array(values, dtype=dtype)
+    expected = integer_array(values, dtype="Int64")
     assert result.dtype == dtype
-    for i in range(len(values)):
-        if not np.isnan(values[i]):
-            assert result[i] == values[i]
+    tm.assert_extension_array_equal(result, expected, check_exact=True)
 
 
 @pytest.mark.parametrize(
