@@ -711,21 +711,6 @@ def test_to_integer_array_float():
 
 
 @pytest.mark.parametrize(
-    "values, dtype",
-    [
-        ([9999999999999999, 123123123123123123, 10000000000000543, np.nan], "Int64"),
-        (np.array([9999999999999999, 123123123123123123, 10000000000000543],
-         dtype=np.int64), "Int64"),
-    ],
-)
-def test_to_integer_array_large_numbers(values, dtype):
-    result = integer_array(values, dtype=dtype)
-    expected = integer_array(values, dtype="Int64")
-    assert result.dtype == dtype
-    tm.assert_extension_array_equal(result, expected, check_exact=True)
-
-
-@pytest.mark.parametrize(
     "bool_values, int_values, target_dtype, expected_dtype",
     [
         ([False, True], [0, 1], Int64Dtype(), Int64Dtype()),
@@ -840,6 +825,28 @@ def test_astype_nansafe():
     with pytest.raises(ValueError, match=msg):
         arr.astype("uint32")
 
+
+@pytest.mark.parametrize(
+    "values, dtype",
+    [
+        ([9999999999999999, 123123123123123123, 10000000000000543, np.nan], "Int64"),
+        (np.array([9999999999999999, 123123123123123123, 10000000000000543],
+         dtype=np.int64), "Int64"),
+    ],
+)
+def test_Series_large_numbers(values, dtype):
+    # issue 30268
+    result = pd.Series(values, dtype=dtype)
+    ecpected = pd.Series()
+    
+    if isinstance(values, np.ndarray):
+        expected = pd.Series([9999999999999999, 123123123123123123, 10000000000000543], dtype="Int64")
+    else:
+        expected = pd.Series([9999999999999999, 123123123123123123, 10000000000000543, 0], dtype="Int64")
+        expected[3] = np.nan
+        
+    assert result.dtype == dtype
+    tm.assert_series_equal(result, expected, check_exact=True)
 
 @pytest.mark.parametrize("ufunc", [np.abs, np.sign])
 def test_ufuncs_single_int(ufunc):
