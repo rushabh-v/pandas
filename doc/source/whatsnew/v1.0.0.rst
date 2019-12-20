@@ -861,7 +861,8 @@ ExtensionArray
 
 - Bug in :class:`arrays.PandasArray` when setting a scalar string (:issue:`28118`, :issue:`28150`).
 - Bug where nullable integers could not be compared to strings (:issue:`28930`)
-- Bug in :function:`arrays.integer.coerce_to_array` while using large-ish integers with ``NaN`` values in ``pd.Series`` (:issue:`30268`)
+- Bug in :func:`arrays.integer.coerce_to_array` while using large-ish integers with ``NaN`` values in ``pd.Series`` (:issue:`30268`)
+
 
 
 Other
