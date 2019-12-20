@@ -838,13 +838,13 @@ def test_Series_large_numbers(values, dtype):
     # issue 30268
     result = pd.Series(values, dtype=dtype)
     ecpected = pd.Series()
-    
+
     if isinstance(values, np.ndarray):
         expected = pd.Series([9999999999999999, 123123123123123123, 10000000000000543], dtype="Int64")
     else:
         expected = pd.Series([9999999999999999, 123123123123123123, 10000000000000543, 0], dtype="Int64")
         expected[3] = np.nan
-        
+
     assert result.dtype == dtype
     tm.assert_series_equal(result, expected, check_exact=True)
 
