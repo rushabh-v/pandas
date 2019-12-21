@@ -210,7 +210,6 @@ def coerce_to_array(values, dtype, mask=None, copy=False):
     if hasattr(values, dtype):
         if copy:
             values = values.copy()
-
     else:
         if isinstance(values, list):
             values = np.array(values, dtype=object, copy=copy)
