@@ -206,14 +206,16 @@ def coerce_to_array(values, dtype, mask=None, copy=False):
             mask = mask.copy()
         return values, mask
 
-    if isinstance(values, list):
-        values = np.array(values, dtype=object, copy=copy)
 
-    elif isinstance(values, np.ndarray):
+    if hasattr(values, dtype):
         if copy:
             values = values.copy()
+
     else:
-        values = np.array(values, copy=copy)
+        if isinstance(values, list):
+            values = np.array(values, dtype=object, copy=copy)
+        else:
+            values = np.array(values, copy=copy)
 
     if is_object_dtype(values):
         inferred_type = lib.infer_dtype(values, skipna=True)
