@@ -207,7 +207,7 @@ def coerce_to_array(values, dtype, mask=None, copy=False):
         return values, mask
 
 
-    if hasattr(values, dtype):
+    if hasattr(values, "dtype"):
         if copy:
             values = values.copy()
     else:
