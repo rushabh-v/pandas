@@ -208,7 +208,7 @@ def coerce_to_array(values, dtype, mask=None, copy=False):
 
 
     if hasattr(values, "dtype"):
-        if copy:
+        if copy and values.dtype!="category":
             values = values.copy()
     else:
         if isinstance(values, list):
