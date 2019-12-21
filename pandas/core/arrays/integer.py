@@ -20,7 +20,8 @@ from pandas.core.dtypes.common import (
     is_object_dtype,
     is_scalar,
 )
-from pandas.core.dtypes.dtypes import register_extension_dtype, CategoricalDtype
+from pandas.core.dtypes.dtypes import register_extension_dtype
+from pandas import Categorical
 from pandas.core.dtypes.missing import isna, notna
 
 from pandas.core import nanops, ops
@@ -208,7 +209,7 @@ def coerce_to_array(values, dtype, mask=None, copy=False):
 
 
     if hasattr(values, "dtype"):
-        if copy and values.dtype!=CategoricalDtype():
+        if copy and not isinstance(values, Categorical):
             values = values.copy()
     else:
         if isinstance(values, list):
