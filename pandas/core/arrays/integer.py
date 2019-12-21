@@ -21,12 +21,11 @@ from pandas.core.dtypes.common import (
     is_scalar,
 )
 from pandas.core.dtypes.dtypes import register_extension_dtype
-from pandas import Categorical
 from pandas.core.dtypes.missing import isna, notna
 
 from pandas.core import nanops, ops
 from pandas.core.algorithms import take
-from pandas.core.arrays import ExtensionArray, ExtensionOpsMixin
+from pandas.core.arrays import ExtensionArray, ExtensionOpsMixin, Categorical
 from pandas.core.ops import invalid_comparison
 from pandas.core.ops.common import unpack_zerodim_and_defer
 from pandas.core.tools.numeric import to_numeric
