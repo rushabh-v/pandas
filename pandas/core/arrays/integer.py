@@ -208,7 +208,9 @@ def coerce_to_array(values, dtype, mask=None, copy=False):
 
 
     if hasattr(values, "dtype"):
-        if copy and not isinstance(values, Categorical):
+        if isinstance(values, Categorical):
+            values = np.array(values, copy=copy)
+        elif copy:
             values = values.copy()
     else:
         if isinstance(values, list):
