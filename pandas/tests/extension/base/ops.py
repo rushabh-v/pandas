@@ -29,6 +29,7 @@ class BaseOpsUtil(BaseExtensionTests):
     def _check_op(self, s, op, other, op_name, exc=NotImplementedError):
         if exc is None:
             result = op(s, other)
+            result = pd.Series(result, dtype = "Int64")
             expected = s.combine(other, op)
             self.assert_series_equal(result, expected)
         else:
