@@ -308,6 +308,9 @@ def read_excel(
             "an ExcelFile - ExcelFile already has the engine set"
         )
 
+    if header is None:
+        raise ValueError("Argument header must be `int` or list of `int`. Got `None`")
+
     return io.parse(
         sheet_name=sheet_name,
         header=header,

@@ -509,6 +509,11 @@ class TestReaders:
         actual = pd.read_excel("blank_with_header" + read_ext, "Sheet1")
         tm.assert_frame_equal(actual, expected)
 
+    def test_read_excel_header_None_raises(self, read_ext):
+        msg = "Argument header must be `int` or list of `int`. Got `None`"
+        with pytest.raises(ValueError, match=msg):
+            read_excel("test1" + read_ext, "Sheet1", header=None)
+
     def test_date_conversion_overflow(self, read_ext):
         # GH 10001 : pandas.ExcelFile ignore parse_dates=False
         if pd.read_excel.keywords["engine"] == "pyxlsb":
